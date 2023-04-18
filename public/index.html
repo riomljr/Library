@@ -8,17 +8,25 @@
   <link href="./style.css" rel="stylesheet">
 </head>
 <body>
-  <form id="NewBook">
-    <label for="Bname">Book Name:</label><br>
-    <input type="text" id="title" name="title"><br>
-    <label for="Author">Author:</label><br>
-    <input type="text" id="author" name="author"><br>
-    <label for="pages">Page Count:</label><br>
-    <input type="integer" id="pages" name="pages"><br>
-    <br>
-    <input id="btn" type="button"  value="Submit">
-  </form>
+  <div id="button">
+    <button id="addbtn" onclick="showForm()">Add Book</button>
+  </div>
+  <div id="NewBook">
+    <form id="form" >
+      <label for="Bname">Book Name:</label><br>
+      <input type="text" id="title" name="title"><br>
+      <label for="Author">Author:</label><br>
+      <input type="text" id="author" name="author"><br>
+      <label for="pages">Page Count:</label><br>
+      <input type="integer" id="pages" name="pages"><br>
+      <br>
+      <input id="btn" type="button"  value="Submit">
+    </form>
+  </div>
   <div id="BooksDisplay" ></div>
 </body>
 <script src="script.js"></script>
+<footer>
+  <div id="credits" >Photos by Clay Banks on Unsplash</div>
+</footer>
 </html>

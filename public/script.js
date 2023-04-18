@@ -1,10 +1,17 @@
 let library = [];
 
-function Book(title, author, pages, read = false) {
+function Book(title, author, pages, read = "Unread") {
   this.title = title
   this.author = author
   this.pages = pages
   this.read = read
+}
+
+Book.prototype.Read = function(){
+  this.read = "Read"
+}
+Book.prototype.unread = function(){
+  this.read = "Unread"
 }
 
 function createBookDiv (book, index) {
@@ -25,9 +32,8 @@ function createBookDiv (book, index) {
 
   const read = document.createElement('p');
   read.classList.add('read');
-  if (book.read == false) {
-  read.textContent = "Unread";
-  }
+  read.textContent = book.read;
+
 
   const DeleteButton = document.createElement('button');
   DeleteButton.classList.add('delete-btn');
@@ -37,15 +43,18 @@ function createBookDiv (book, index) {
   ReadButton.classList.add('read-btn');
   ReadButton.textContent = "Read";
 
-
-
-  
-  
-  
-  
-  
-  
-
+  ReadButton.addEventListener('click', () => {
+    if (ReadButton.textContent == "Read") {
+      book.Read()
+      read.textContent = book.read
+      ReadButton.textContent = "Unread"
+    }
+      else {
+        book.unread()
+      read.textContent = book.read
+      ReadButton.textContent = "Read"
+    }
+  });
   DeleteButton.addEventListener('click', () => {
     if (!document.querySelector(`.a${index}`)) {
       console.log("doesn't exist")
@@ -58,12 +67,12 @@ function createBookDiv (book, index) {
 
 
   bookContainer.appendChild(content);
-  content.appendChild(DeleteButton);
-  content.appendChild(ReadButton);
   content.appendChild(title);
   content.appendChild(author);
   content.appendChild(pages);
   content.appendChild(read);
+  content.appendChild(DeleteButton);
+  content.appendChild(ReadButton);
 }
 
 function diplayAllBooks() {
@@ -92,6 +101,12 @@ function preLoadBooks(){
   library.push(harry, DaringGreatly, tower);
   diplayAllBooks();
 }
+function hide() {
+  const hideForm = document.getElementById('NewBook');
+  hideForm.style.display = "none";
+  const button = document.getElementById('addbtn');
+  button.style.display = "flex";
+  }
 
 function addNewBook(){
   const title = document.getElementById('title');
@@ -101,10 +116,17 @@ function addNewBook(){
   const NewBook = new Book(title.value, author.value, pages.value);
   library.push(NewBook);
   diplayAllBooks();
+  hide()
 }
 
 
-
+function showForm() {
+  const hideForm = document.getElementById('NewBook');
+  hideForm.style.display = "flex";
+  const button = document.getElementById('addbtn');
+  button.style.display = "none";
+}
+hide()
 preLoadBooks();
 btn.addEventListener('click', addNewBook);
 
